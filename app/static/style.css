@@ -1,0 +1,87 @@
+:root {
+  --ink: #1b2430; --muted: #5d6875; --line: #d8dcd6; --paper: #f2f3ef; --surface: #ffffff;
+  --accent: #0b5f63; --accent-ink: #ffffff; --danger: #9b2226;
+  --st-submitted: #3b5b92; --st-submitted-bg: #e5ebf7;
+  --st-in_progress: #85540a; --st-in_progress-bg: #fcefd0;
+  --st-delivered: #5b3fa0; --st-delivered-bg: #ebe5f8;
+  --st-accepted: #1d6b3a; --st-accepted-bg: #dcf2e3;
+  --st-rejected: #9b2226; --st-rejected-bg: #fbe2e2;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink); background: var(--paper); line-height: 1.45;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .6rem; }
+h1 { font-size: 1.15rem; } h2 { font-size: 1.05rem; } h3 { font-size: .95rem; }
+.muted { color: var(--muted); } .small { font-size: .85rem; }
+:focus-visible { outline: 3px solid #2b8a8f; outline-offset: 2px; }
+
+.topbar { display: flex; align-items: center; gap: 1rem; padding: .7rem 1.25rem; background: var(--ink); color: #fff; }
+.topbar h1 { margin: 0; flex: 1; font-size: 1.05rem; letter-spacing: .2px; }
+.topbar .who { font-size: .9rem; opacity: .9; }
+.container { max-width: 1180px; margin: 0 auto; padding: 1.25rem; }
+
+.tabs { display: flex; gap: .25rem; border-bottom: 2px solid var(--line); margin-bottom: 1rem; }
+.tabs button { background: none; border: 0; padding: .6rem 1rem; font: inherit; cursor: pointer; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.1rem; margin-bottom: 1rem; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1rem; align-items: start; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
+label { display: block; font-size: .85rem; font-weight: 600; margin: .6rem 0 .2rem; }
+input, select, textarea { width: 100%; font: inherit; padding: .45rem .55rem; border: 1px solid #b9bfb8; border-radius: 4px; background: #fff; color: var(--ink); }
+input[type="checkbox"] { width: auto; }
+textarea { min-height: 3.5rem; resize: vertical; }
+.row { display: flex; gap: .75rem; flex-wrap: wrap; align-items: end; }
+.row > * { flex: 1; min-width: 130px; }
+.row > .auto { flex: 0 0 auto; }
+.inline { display: flex; align-items: center; gap: .4rem; font-weight: 400; margin: 0; }
+
+button.btn { font: inherit; padding: .5rem .95rem; border-radius: 4px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; font-weight: 600; }
+button.btn:hover { filter: brightness(1.1); }
+button.btn.secondary { background: #fff; color: var(--accent); }
+button.btn.danger { background: #fff; color: var(--danger); border-color: var(--danger); }
+button.btn:disabled { opacity: .5; cursor: not-allowed; }
+button.link { background: none; border: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; padding: 0; }
+.actions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th { text-align: left; font-weight: 600; color: var(--muted); border-bottom: 2px solid var(--line); padding: .4rem .5rem; white-space: nowrap; }
+td { padding: .45rem .5rem; border-bottom: 1px solid #e8ebe6; vertical-align: top; }
+tbody tr.clickable { cursor: pointer; }
+tbody tr.clickable:hover, tbody tr.selected { background: #eef4f3; }
+.scroll { overflow-x: auto; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.badge { display: inline-block; padding: .1rem .55rem; border-radius: 999px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+.badge.submitted { color: var(--st-submitted); background: var(--st-submitted-bg); }
+.badge.in_progress { color: var(--st-in_progress); background: var(--st-in_progress-bg); }
+.badge.delivered { color: var(--st-delivered); background: var(--st-delivered-bg); }
+.badge.accepted { color: var(--st-accepted); background: var(--st-accepted-bg); }
+.badge.rejected { color: var(--st-rejected); background: var(--st-rejected-bg); }
+.badge.good { color: var(--st-accepted); background: var(--st-accepted-bg); }
+.badge.usable { color: var(--st-in_progress); background: var(--st-in_progress-bg); }
+.badge.bad { color: var(--st-rejected); background: var(--st-rejected-bg); }
+
+.stepper { display: flex; margin: .4rem 0 1rem; padding: 0; list-style: none; }
+.stepper li { flex: 1; text-align: center; font-size: .78rem; color: var(--muted); padding-top: .55rem; position: relative; border-top: 4px solid var(--line); }
+.stepper li.done { border-top-color: var(--accent); color: var(--ink); }
+.stepper li.current { border-top-color: var(--accent); color: var(--ink); font-weight: 700; }
+.stepper li.current.rejected { border-top-color: var(--danger); color: var(--danger); }
+
+.progress { height: 8px; background: #e4e8e3; border-radius: 4px; overflow: hidden; margin: .25rem 0 .1rem; }
+.progress > span { display: block; height: 100%; background: var(--accent); }
+
+.history { list-style: none; padding: 0; margin: 0; font-size: .88rem; }
+.history li { padding: .35rem 0; border-bottom: 1px solid #e8ebe6; }
+.kv { display: grid; grid-template-columns: 9rem 1fr; gap: .25rem .75rem; font-size: .9rem; margin: .5rem 0; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; }
+
+.error { color: var(--danger); font-size: .9rem; margin: .5rem 0; }
+.empty { color: var(--muted); padding: 1rem 0; }
+.login { max-width: 380px; margin: 8vh auto; }
+.pager { display: flex; gap: .75rem; align-items: center; justify-content: flex-end; margin-top: .5rem; font-size: .85rem; }
+#toast { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: .6rem 1rem; border-radius: 6px; font-size: .9rem; opacity: 0; pointer-events: none; transition: opacity .2s; max-width: 90vw; }
+#toast.show { opacity: 1; } #toast.err { background: var(--danger); }
+@media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
