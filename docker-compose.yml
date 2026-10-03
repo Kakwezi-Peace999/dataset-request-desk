@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: drd
+      POSTGRES_PASSWORD: drd
+      POSTGRES_DB: drd
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U drd -d drd"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://drd:drd@db:5432/drd
+      # Override in any real deployment: SECRET_KEY=<long random string> docker compose up
+      SECRET_KEY: ${SECRET_KEY:-dev-only-change-me}
+      SEED_EPISODES: "1"   # also import seed/episodes.csv on start (idempotent)
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
